@@ -33,11 +33,20 @@ app.post('/api/clientes', (req, res)=>{
 })
 
 app.put('/api/clientes/:id', (req, res)=>{
-    res.send('<h1 style="color:blue;">Atualizar cliente</h1>')
+
+    let newCliente = req.body;
+    newCliente.id = req.params.id;
+    
+    negocio.atualiza(newCliente);
+    
+    res.send('<h1 style="color:blue;">Cliente atualizado com sucesso</h1>')
 })
 
 app.delete('/api/clientes/:id', (req, res)=>{
-    res.send('<h1 style="color:blue;">Deletar clientes</h1>')
+    let id = req.params.id;
+    negocio.remover(id)
+    
+    res.send('<h1 style="color:blue;">Cliente deletado com sucesso</h1>')
 })
 
 app.listen(port, ()=>{
